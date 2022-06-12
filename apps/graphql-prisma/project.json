@@ -1,0 +1,84 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/graphql-prisma/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/graphql-prisma",
+        "index": "apps/graphql-prisma/src/index.html",
+        "baseHref": "/",
+        "main": "apps/graphql-prisma/src/main.tsx",
+        "polyfills": "apps/graphql-prisma/src/polyfills.ts",
+        "tsConfig": "apps/graphql-prisma/tsconfig.app.json",
+        "assets": [
+          "apps/graphql-prisma/src/favicon.ico",
+          "apps/graphql-prisma/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/graphql-prisma/src/environments/environment.ts",
+              "with": "apps/graphql-prisma/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "graphql-prisma:build",
+        "hmr": true,
+        "proxyConfig": "apps/graphql-prisma/proxy.conf.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "graphql-prisma:build:development"
+        },
+        "production": {
+          "buildTarget": "graphql-prisma:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/graphql-prisma/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/graphql-prisma"],
+      "options": {
+        "jestConfig": "apps/graphql-prisma/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces",
+    "graphql-prisma": "apps/graphql-prisma",
+    "graphql-prisma-e2e": "apps/graphql-prisma-e2e"
+  }
+}
