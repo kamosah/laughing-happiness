@@ -1,16 +1,8 @@
-import * as express from 'express';
-import { Message } from '@laughing-happiness/api-interfaces';
+import { ApolloServer } from 'apollo-server';
+import { resolvers, typeDefs } from './schema';
 
-const app = express();
+const port = process.env.PORT || 8080;
 
-const greeting: Message = { message: 'Welcome to api!' };
-
-app.get('/api', (req, res) => {
-  res.send(greeting);
-});
-
-const port = process.env.port || 3333;
-const server = app.listen(port, () => {
-  console.log('Listening at http://localhost:' + port + '/api');
-});
-server.on('error', console.error);
+new ApolloServer({ resolvers, typeDefs }).listen({ port }, () =>
+  console.log(`Server ready at: http://localhost:${port}`)
+);
